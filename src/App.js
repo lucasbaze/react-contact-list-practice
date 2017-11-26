@@ -26,13 +26,12 @@ class App extends Component {
 
   componentDidMount(){
     AppStore.addChangeListener(this._onChange);
-    FirebaseAPI.getContacts();
   }
-
+  /*
   componentWillMount(){
     FirebaseAPI.initializeFirebase();
   }
-
+  */
   componentWillUnmount(){
     AppStore.removeChangeListener(this._onChange)
   }
@@ -51,5 +50,7 @@ class App extends Component {
     );
   }
 }
+
+//FirebaseAPI.initializeFirebase();
 
 export default App;

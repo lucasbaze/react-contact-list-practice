@@ -26,12 +26,10 @@ class AppStore extends EventEmitter{
 
 	saveContact = (contact) => {
 		_contacts.push(contact);
-		this.emitChange();
 	}
 
 	setContacts = (contacts) => {
 		_contacts = contacts;
-		this.emitChange();
 	}
 
 	getContacts = () => {
@@ -47,15 +45,14 @@ class AppStore extends EventEmitter{
 				//this.saveContact(action.contact);
 				//Save to Firebase
 				FirebaseAPI.saveContact(action.contact);
+				this.emitChange();
 				break;
 			case AppConstants.RECEIVE_CONTACTS:
 				//Update to the local store
-				this.setContacts(action.contacts)
+				this.setContacts(action.contacts);
+				this.emitChange();
 				break;
 			}
-		
-
-		return true;
 	}
 }
 

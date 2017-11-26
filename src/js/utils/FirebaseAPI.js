@@ -26,13 +26,14 @@ export function saveContact(contact){
 
 }
 
-export function getContacts(){
+export function pullContacts(){
 
 	let database = firebase.database();
-	database.ref().on("value", function(snapshot){
 
-		var contacts = [];
-		
+	database.ref().on("value", function(snapshot){
+	
+		let contacts = [];
+
 		snapshot.forEach(function(childSnapshot){
 			
 			var contact = {
@@ -42,10 +43,8 @@ export function getContacts(){
 				email: childSnapshot.val().contact.email
 					}
 			contacts.push(contact);
-			console.log(contact);
 			AppActions.receiveContacts(contacts);
-		
+
 		});
-		
 	});
 }
